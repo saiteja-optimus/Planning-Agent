@@ -1,6 +1,6 @@
 # Buildathon
 
-A hackathon project built with Claude Code.
+A hackathon project built by Sai Talluri.
 
 ## About
 
