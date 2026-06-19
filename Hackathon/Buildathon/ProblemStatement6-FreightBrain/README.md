@@ -3,6 +3,8 @@
 > **Buildathon 2026 — Data Pipeline Track**
 > Team: Lone Rangers | Problem Statement 6
 
+**Live Demo:** https://lone-rangers-genai-cqmk6earfsgp89kd5m496x.streamlit.app/
+
 ---
 
 ## What It Does
