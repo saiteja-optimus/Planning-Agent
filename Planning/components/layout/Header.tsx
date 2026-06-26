@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import { useSessionStore } from '@/lib/store/sessionStore'
 
 export default function Header() {
@@ -6,7 +7,7 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-40 bg-noir-950/95 backdrop-blur-sm border-b border-gold-500/20">
       <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
           <div className="w-8 h-8 bg-gold-500 rounded flex items-center justify-center shadow-lg shadow-gold-500/30">
             <span className="font-display font-bold text-noir-900 text-sm">C</span>
           </div>
@@ -16,7 +17,7 @@ export default function Header() {
               Cinematic Thinking Engine
             </div>
           </div>
-        </div>
+        </Link>
         <div className="flex items-center gap-4">
           {appStage !== 'idle' && (
             <div className="flex items-center gap-2">
