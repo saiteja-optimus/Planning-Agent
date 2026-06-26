@@ -1,0 +1,11 @@
+{
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "code-review-graph"
+  ],
+  "permissions": {
+    "allow": [
+      "Bash(cd /c/Users/tallu/Documents/Claude/Planning git remote add planning git@github.com:saiteja-optimus/Planning-Agent.git)"
+    ]
+  }
+}
