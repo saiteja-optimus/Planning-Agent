@@ -11,7 +11,8 @@
       "Skill(update-config)",
       "Bash(npm run *)",
       "Bash(git checkout *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git merge *)"
     ]
   },
   "enableAllProjectMcpServers": true,
