@@ -1,4 +1,4 @@
-import { anthropic } from '@/lib/claude/client'
+import { nimClient, NIM_MODEL } from '@/lib/claude/client'
 import { DIRECT_SYSTEM, buildDirectPrompt } from '@/lib/claude/prompts/direct.prompt'
 import { ThinkOutput, PlanOutput } from '@/types/pipeline'
 
@@ -15,20 +15,20 @@ export async function POST(req: Request) {
   const stream = new ReadableStream({
     async start(controller) {
       try {
-        const msgStream = anthropic.messages.stream({
-          model: 'claude-sonnet-4-6',
+        const nimStream = await nimClient.chat.completions.create({
+          model: NIM_MODEL,
           max_tokens: 3000,
-          system: DIRECT_SYSTEM,
-          messages: [{ role: 'user', content: buildDirectPrompt(idea, thinkOutput, planOutput) }],
+          messages: [
+            { role: 'system', content: DIRECT_SYSTEM },
+            { role: 'user', content: buildDirectPrompt(idea, thinkOutput, planOutput) },
+          ],
+          stream: true,
         })
 
-        for await (const chunk of msgStream) {
-          if (
-            chunk.type === 'content_block_delta' &&
-            chunk.delta.type === 'text_delta'
-          ) {
-            const data = JSON.stringify({ delta: chunk.delta.text })
-            controller.enqueue(encoder.encode(`data: ${data}\n\n`))
+        for await (const chunk of nimStream) {
+          const delta = chunk.choices[0]?.delta?.content || ''
+          if (delta) {
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ delta })}\n\n`))
           }
         }
         controller.enqueue(encoder.encode('data: [DONE]\n\n'))
